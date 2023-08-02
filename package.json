@@ -1,0 +1,80 @@
+{
+  "name": "sanity-plugin-recurring-dates",
+  "version": "1.0.0",
+  "description": "Add a custom input component to manage recurring dates (e.g. for events)",
+  "keywords": [
+    "sanity",
+    "sanity-plugin"
+  ],
+  "license": "MIT",
+  "author": "Tom Smith <tom@sanity.io>",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "source": "./src/index.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.esm.js",
+      "default": "./dist/index.esm.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
+  "source": "./src/index.ts",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "sanity.json",
+    "src",
+    "v2-incompatible.js"
+  ],
+  "scripts": {
+    "build": "run-s clean && plugin-kit verify-package --silent && pkg-utils build --strict && pkg-utils --strict",
+    "clean": "rimraf dist",
+    "format": "prettier --write --cache --ignore-unknown .",
+    "link-watch": "plugin-kit link-watch",
+    "lint": "eslint .",
+    "prepublishOnly": "run-s build",
+    "watch": "pkg-utils watch --strict"
+  },
+  "dependencies": {
+    "@sanity/icons": "^2.4.1",
+    "@sanity/incompatible-plugin": "^1.0.4",
+    "@sanity/ui": "^1.7.4",
+    "date-fns-tz": "^2.0.0",
+    "lodash": "^4.17.21",
+    "rrule": "^2.7.2",
+    "sanity-plugin-utils": "^1.6.2"
+  },
+  "devDependencies": {
+    "@sanity/pkg-utils": "^2.3.9",
+    "@sanity/plugin-kit": "^3.1.7",
+    "@types/react": "^18.2.17",
+    "@typescript-eslint/eslint-plugin": "^6.2.0",
+    "@typescript-eslint/parser": "^6.2.0",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.9.0",
+    "eslint-config-sanity": "^6.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.33.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.0.0",
+    "prettier-plugin-packagejson": "^2.4.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-is": "^18.2.0",
+    "rimraf": "^5.0.1",
+    "sanity": "^3.14.4",
+    "styled-components": "^5.3.11",
+    "typescript": "^5.1.6"
+  },
+  "peerDependencies": {
+    "react": "^18",
+    "sanity": "^3"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
