@@ -78,7 +78,11 @@ export const CommonDateTimeInput = React.forwardRef(function CommonDateTimeInput
 
   const forwardedRef = useForwardedRef(ref)
 
-  const parseResult = localValue ? parseInputValue(localValue) : value ? deserialize(value) : null
+  const parseResult = localValue
+    ? parseInputValue(localValue)
+    : value
+    ? deserialize(value as string)
+    : null
 
   const inputValue = localValue
     ? localValue
