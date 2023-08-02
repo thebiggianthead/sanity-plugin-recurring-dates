@@ -1,11 +1,19 @@
 {
   "name": "sanity-plugin-recurring-dates",
   "version": "1.0.0",
-  "description": "Add a custom input component to manage recurring dates (e.g. for events)",
+  "description": "Add a custom input component to your Sanity Studio to manage recurring dates (e.g. for events)",
   "keywords": [
     "sanity",
     "sanity-plugin"
   ],
+  "homepage": "https://github.com/thebiggianthead/sanity-plugin-recurring-dates#readme",
+  "bugs": {
+    "url": "https://github.com/thebiggianthead/sanity-plugin-recurring-dates/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:thebiggianthead/sanity-plugin-recurring-dates.git"
+  },
   "license": "MIT",
   "author": "Tom Smith <tom@sanity.io>",
   "exports": {
@@ -35,7 +43,8 @@
     "link-watch": "plugin-kit link-watch",
     "lint": "eslint .",
     "prepublishOnly": "run-s build",
-    "watch": "pkg-utils watch --strict"
+    "watch": "pkg-utils watch --strict",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@sanity/icons": "^2.4.1",
@@ -46,8 +55,11 @@
     "sanity-plugin-utils": "^1.6.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.6.7",
+    "@commitlint/config-conventional": "^17.6.7",
     "@sanity/pkg-utils": "^2.3.9",
     "@sanity/plugin-kit": "^3.1.7",
+    "@sanity/semantic-release-preset": "^4.1.2",
     "@types/react": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "@typescript-eslint/parser": "^6.2.0",
@@ -58,6 +70,8 @@
     "eslint-plugin-react": "^7.33.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.0.0",
     "prettier-plugin-packagejson": "^2.4.5",
