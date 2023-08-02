@@ -41,7 +41,6 @@
     "@sanity/icons": "^2.4.1",
     "@sanity/incompatible-plugin": "^1.0.4",
     "@sanity/ui": "^1.7.4",
-    "date-fns-tz": "^2.0.0",
     "lodash": "^4.17.21",
     "rrule": "^2.7.2",
     "sanity-plugin-utils": "^1.6.2"
