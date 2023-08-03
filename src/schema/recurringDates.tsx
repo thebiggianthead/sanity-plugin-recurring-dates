@@ -4,7 +4,7 @@ import {RecurringDates} from '../components/RecurringDate'
 import {PluginConfig, WithRequiredProperty} from '../types'
 
 export default (config: WithRequiredProperty<PluginConfig, 'defaultRecurrences'>) => {
-  const {hideEndDate, dateTimeOptions} = config
+  const {dateTimeOptions} = config
 
   return defineField({
     name: 'recurringDates',
@@ -36,7 +36,7 @@ export default (config: WithRequiredProperty<PluginConfig, 'defaultRecurrences'>
         type: 'string',
         hidden: true,
       }),
-    ].filter((field) => !(field.name === 'endDate' && hideEndDate)),
+    ],
     components: {
       input: (props) => RecurringDates({...props, pluginConfig: config}),
     },

@@ -2,20 +2,25 @@ import {Box, Flex, Grid, Select, Stack, Text} from '@sanity/ui'
 import {upperFirst} from 'lodash'
 import React, {useCallback, useState} from 'react'
 import {rrulestr} from 'rrule'
-import {ObjectInputMember, type ObjectInputProps, set} from 'sanity'
+import {ObjectInputMember, type ObjectInputProps, ObjectSchemaType, set} from 'sanity'
 import {Feedback} from 'sanity-plugin-utils'
 
 import type {PluginConfig, WithRequiredProperty} from '../types'
 import {validateRRuleStrings} from '../utils'
 import {CustomRule} from './CustomRule'
+import {RemoveEndDate} from './RemoveEndDate'
 
 type RecurringDatesProps = ObjectInputProps & {
   pluginConfig: WithRequiredProperty<PluginConfig, 'defaultRecurrences'>
 }
 
+type RecurringDateObjectSchemaType = Omit<ObjectSchemaType, 'options'> & {
+  options?: PluginConfig
+}
+
 export function RecurringDates(props: RecurringDatesProps) {
   const {onChange, members, value: currentValue, schemaType, pluginConfig} = props
-  const {options}: {options?: PluginConfig} = schemaType
+  const {options, title}: RecurringDateObjectSchemaType = schemaType
   const {defaultRecurrences, hideEndDate, hideCustom, dateTimeOptions} = {
     ...pluginConfig,
     ...options,
@@ -32,10 +37,8 @@ export function RecurringDates(props: RecurringDatesProps) {
       const {value} = event.currentTarget
 
       if (value == 'custom') {
-        // open modal...
         onOpen()
       } else {
-        // update the field
         onChange(set(value, ['rrule']))
       }
     },
@@ -82,9 +85,13 @@ export function RecurringDates(props: RecurringDatesProps) {
     }
   }
 
+  // Do we have an end date set for this field?
+  const hasEndDate = currentValue && currentValue.endDate
+
   return (
     <Stack space={3}>
       <Grid columns={hideEndDate ? 1 : 2} gap={3}>
+        {hasEndDate && hideEndDate && <RemoveEndDate title={title} onChange={onChange} />}
         <Flex align="flex-end" gap={2}>
           <Box flex={1}>
             {startDateMember && <ObjectInputMember member={startDateMember} {...renderProps} />}
