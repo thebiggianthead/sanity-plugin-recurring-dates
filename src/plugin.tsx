@@ -4,7 +4,7 @@ import {DEFAULT_CONFIG} from './constants'
 import recurringDateSchema from './schema/recurringDates'
 import {PluginConfig, WithRequiredProperty} from './types'
 
-export const recurringDates = definePlugin<PluginConfig>((config) => {
+export const recurringDates = definePlugin<PluginConfig | void>((config) => {
   const pluginConfig: WithRequiredProperty<PluginConfig, 'defaultRecurrences'> = {
     ...DEFAULT_CONFIG,
     ...config,

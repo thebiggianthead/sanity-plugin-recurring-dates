@@ -25,3 +25,9 @@ declare module 'sanity' {
     recurringDates: RecurringDateFieldOptions
   }
 }
+
+export interface RecurringDate {
+  rrule: string
+  startDate: string
+  endDate: String
+}

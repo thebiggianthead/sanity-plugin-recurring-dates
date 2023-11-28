@@ -135,13 +135,16 @@ import {formatInTimeZone, getTimezoneOffset} from 'date-fns-tz'
 // your desired timezone
 const timezone = 'Europe/London'
 
+// Start date as a date
+const startDate = new Date(recurringDate.startDate)
+
 // Pass your rrule and startDate to the `rrulestr` function
-const upcomingRule = rrulestr(rrule, {
+const upcomingRule = rrulestr(recurringDate.rrule, {
   dtstart: startDate,
 })
 
 // Calculate the offset from UTC for your timezone at the start date
-const initialOffset = getTimezoneOffset(timezone, new Date(startDate))
+const initialOffset = getTimezoneOffset(timezone, startDate)
 
 // Map through all the rules, returning an array of dates in the correct timezone
 // with consideration for changes in timezone offset as a result of DST
@@ -157,11 +160,7 @@ const allDates = rule.all().map((date) => {
 
   // Return a formatted date from the date needed, with the format we pass
   // in the third parameter
-  return formatInTimeZone(
-    date.setTime(date.getTime() + diff),
-    timezone,
-    'EEEE, MMMM d, yyyy h:mm aaaa',
-  )
+  return formatInTimeZone(date, timezone, 'EEEE, MMMM d, yyyy h:mm aaaa')
 })
 ```
 
@@ -176,7 +175,6 @@ with default configuration for build & watch scripts.
 
 See [Testing a plugin in Sanity Studio](https://github.com/sanity-io/plugin-kit#testing-a-plugin-in-sanity-studio)
 on how to run this plugin with hotreload in the studio.
-
 
 ### Release new version
 
