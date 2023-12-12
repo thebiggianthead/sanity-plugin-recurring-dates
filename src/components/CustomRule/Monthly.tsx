@@ -50,7 +50,7 @@ export function Monthly(props: MonthlyProps) {
       </Box>
       {weekNo && (
         <Box>
-          <Select name="day" value={dayNo ? dayNo : 1} onChange={handleChange}>
+          <Select name="day" value={dayNo ? dayNo : 0} onChange={handleChange}>
             {DAYS.map((day: string, i: number) => {
               const weekday = new Weekday(i)
               return (
