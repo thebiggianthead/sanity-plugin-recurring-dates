@@ -4,7 +4,7 @@ import {RecurringDates} from '../components/RecurringDate'
 import {PluginConfig, WithRequiredProperty} from '../types'
 
 export default (config: WithRequiredProperty<PluginConfig, 'defaultRecurrences'>) => {
-  const {dateTimeOptions} = config
+  const {dateTimeOptions, dateOnly} = config
 
   return defineField({
     name: 'recurringDates',
@@ -14,14 +14,14 @@ export default (config: WithRequiredProperty<PluginConfig, 'defaultRecurrences'>
       defineField({
         title: 'Start Date',
         name: 'startDate',
-        type: 'datetime',
+        type: dateOnly ? 'date' : 'datetime',
         options: dateTimeOptions,
         validation: (Rule) => Rule.required(),
       }),
       defineField({
         title: 'End Date',
         name: 'endDate',
-        type: 'datetime',
+        type: dateOnly ? 'date' : 'datetime',
         options: dateTimeOptions,
         validation: (Rule) => Rule.min(Rule.valueOfField('startDate')),
       }),

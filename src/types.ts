@@ -5,6 +5,7 @@ export interface PluginConfig {
   hideEndDate?: boolean
   hideCustom?: boolean
   dateTimeOptions?: DatetimeOptions
+  dateOnly?: boolean
 }
 
 export type WithRequiredProperty<Type, Key extends keyof Type> = Type & {

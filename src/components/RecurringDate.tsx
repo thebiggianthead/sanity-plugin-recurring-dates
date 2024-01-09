@@ -21,7 +21,7 @@ type RecurringDateObjectSchemaType = Omit<ObjectSchemaType, 'options'> & {
 export function RecurringDates(props: RecurringDatesProps) {
   const {onChange, members, value: currentValue, schemaType, pluginConfig} = props
   const {options, title}: RecurringDateObjectSchemaType = schemaType
-  const {defaultRecurrences, hideEndDate, hideCustom, dateTimeOptions} = {
+  const {defaultRecurrences, hideEndDate, hideCustom, dateTimeOptions, dateOnly} = {
     ...pluginConfig,
     ...options,
   }
@@ -85,6 +85,25 @@ export function RecurringDates(props: RecurringDatesProps) {
     }
   }
 
+  if (dateOnly === true) {
+    if (startDateMember?.kind == 'field') {
+      startDateMember.field.schemaType.name = 'date'
+    }
+
+    if (endDateMember?.kind == 'field') {
+      endDateMember.field.schemaType.name = 'date'
+    }
+  } else {
+    // we need to explicitly set the schemaType to datetime
+    if (startDateMember?.kind == 'field') {
+      startDateMember.field.schemaType.name = 'datetime'
+    }
+
+    if (endDateMember?.kind == 'field') {
+      endDateMember.field.schemaType.name = 'datetime'
+    }
+  }
+
   // Do we have an end date set for this field?
   const hasEndDate = currentValue && currentValue.endDate
 
@@ -114,7 +133,7 @@ export function RecurringDates(props: RecurringDatesProps) {
         </Feedback>
       ) : (
         <Select onChange={handleChange} value={currentValue?.rrule}>
-          <option value="">Doesn't repeat</option>
+          <option value="">Doesn&#39;t repeat</option>
           {availableRecurrences.map((recurrence) => {
             if (!recurrence) {
               return null
