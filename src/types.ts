@@ -30,5 +30,5 @@ declare module 'sanity' {
 export interface RecurringDate {
   rrule: string
   startDate: string
-  endDate: String
+  endDate: string
 }
