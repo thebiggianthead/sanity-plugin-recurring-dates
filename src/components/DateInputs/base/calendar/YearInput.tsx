@@ -1,5 +1,6 @@
-import React from 'react'
 import {TextInput} from '@sanity/ui'
+import React from 'react'
+
 import {LazyTextInput} from '../LazyTextInput'
 
 type Props = Omit<React.ComponentProps<typeof TextInput>, 'onChange' | 'value'> & {
@@ -15,7 +16,7 @@ export const YearInput = ({onChange, ...props}: Props) => {
         onChange(numericValue)
       }
     },
-    [onChange]
+    [onChange],
   )
 
   return <LazyTextInput {...props} onChange={handleChange} inputMode="numeric" />

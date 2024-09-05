@@ -1,6 +1,6 @@
 import {Box, Grid, Text} from '@sanity/ui'
 import {isSameDay, isSameMonth} from 'date-fns'
-import React from 'react'
+
 import {CalendarDay} from './CalendarDay'
 import {WEEK_DAY_NAMES} from './constants'
 import {getWeeksOfMonth} from './utils'
@@ -44,7 +44,7 @@ export function CalendarMonth(props: CalendarMonthProps) {
                 selected={selected}
               />
             )
-          })
+          }),
         )}
       </Grid>
     </Box>
