@@ -18,7 +18,7 @@ type RecurringDateObjectSchemaType = Omit<ObjectSchemaType, 'options'> & {
   options?: PluginConfig
 }
 
-export function RecurringDates(props: RecurringDatesProps) {
+export function RecurringDates(props: RecurringDatesProps): React.JSX.Element {
   const {onChange, members, value: currentValue, schemaType, pluginConfig} = props
   const {options, title}: RecurringDateObjectSchemaType = schemaType
   const {defaultRecurrences, hideEndDate, hideCustom, dateTimeOptions, dateOnly} = {

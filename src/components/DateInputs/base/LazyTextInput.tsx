@@ -1,17 +1,13 @@
-import React from 'react'
 import {TextInput} from '@sanity/ui'
+import React from 'react'
 
 type TextInputProps = React.ComponentProps<typeof TextInput>
 
-// todo: delete this when v0.34 of @sanity/ui is out
-type Workaround = any
-
-type Props = Workaround &
-  Omit<TextInputProps, 'onChange'> & {
-    onChange?: (
-      event: React.FocusEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement>
-    ) => void
-  }
+type Props = Omit<TextInputProps, 'onChange'> & {
+  onChange?: (
+    event: React.FocusEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement>,
+  ) => void
+}
 
 /**
  * A TextInput that only emit onChange when it has to
@@ -20,15 +16,17 @@ type Props = Workaround &
  */
 export const LazyTextInput = React.forwardRef(function LazyTextInput(
   {onChange, onBlur, onKeyPress, value, ...rest}: Props,
-  forwardedRef: React.ForwardedRef<HTMLInputElement>
+  forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
   const [inputValue, setInputValue] = React.useState<string>()
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange = React.useCallback((event: any) => {
     setInputValue(event.currentTarget.value)
   }, [])
 
   const checkEvent = React.useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (event: any) => {
       const currentValue = event.currentTarget.value
       if (currentValue !== `${value}`) {
@@ -38,17 +36,18 @@ export const LazyTextInput = React.forwardRef(function LazyTextInput(
       }
       setInputValue(undefined)
     },
-    [onChange, value]
+    [onChange, value],
   )
 
   const handleBlur = React.useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (e: any) => {
       checkEvent(e)
       if (onBlur) {
         onBlur(e)
       }
     },
-    [checkEvent, onBlur]
+    [checkEvent, onBlur],
   )
 
   const handleKeyPress = React.useCallback(
@@ -60,7 +59,7 @@ export const LazyTextInput = React.forwardRef(function LazyTextInput(
         onKeyPress(e)
       }
     },
-    [checkEvent, onKeyPress]
+    [checkEvent, onKeyPress],
   )
 
   return (

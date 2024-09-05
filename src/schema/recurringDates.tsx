@@ -1,9 +1,11 @@
-import {defineField} from 'sanity'
+import {defineField, SchemaTypeDefinition} from 'sanity'
 
 import {RecurringDates} from '../components/RecurringDate'
 import {PluginConfig, WithRequiredProperty} from '../types'
 
-export default (config: WithRequiredProperty<PluginConfig, 'defaultRecurrences'>) => {
+export default (
+  config: WithRequiredProperty<PluginConfig, 'defaultRecurrences'>,
+): SchemaTypeDefinition => {
   const {dateTimeOptions, dateOnly} = config
 
   return defineField({

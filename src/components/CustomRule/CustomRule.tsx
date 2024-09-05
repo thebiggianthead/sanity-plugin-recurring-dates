@@ -23,7 +23,7 @@ export function CustomRule({
   initialValue: string
   startDate: string | undefined
   dateTimeOptions: PluginConfig['dateTimeOptions']
-}) {
+}): React.JSX.Element {
   const initialRule = useMemo(() => {
     return initialValue ? rrulestr(initialValue) : new RRule()
   }, [initialValue])
@@ -48,8 +48,6 @@ export function CustomRule({
         setFrequency(Number(value))
       } else if (name === 'interval') {
         setInterval(Number(value))
-      } else if (name === 'interval') {
-        setCount(Number(value))
       } else if (name === 'count') {
         setCount(Number(value))
       }
@@ -113,118 +111,113 @@ export function CustomRule({
     onChange(set(newRule.toString(), ['rrule']))
   }, [byweekday, count, frequency, interval, onChange, onClose, until])
 
-  return (
-    open && (
-      <Dialog
-        header="Custom recurrence"
-        id="dialog-example"
-        onClose={onClose}
-        zOffset={1000}
-        width={1}
-      >
-        <Flex direction="column">
-          <Box flex={1} overflow="auto" padding={4}>
-            <Stack space={4}>
+  return open ? (
+    <Dialog
+      header="Custom recurrence"
+      id="dialog-example"
+      onClose={onClose}
+      zOffset={1000}
+      width={1}
+    >
+      <Flex direction="column">
+        <Box flex={1} overflow="auto" padding={4}>
+          <Stack space={4}>
+            <Flex gap={2} align="center">
+              <Text style={{whiteSpace: 'nowrap'}}>Repeat every</Text>
+              <Box style={{width: '75px'}}>
+                <TextInput name="interval" type="number" value={interval} onChange={handleChange} />
+              </Box>
+              <Box>
+                <Select name="freq" value={frequency} onChange={handleChange}>
+                  <option value={RRule.YEARLY}>years</option>
+                  <option value={RRule.MONTHLY}>months</option>
+                  <option value={RRule.WEEKLY}>weeks</option>
+                  <option value={RRule.DAILY}>days</option>
+                </Select>
+              </Box>
+            </Flex>
+
+            {frequency === RRule.MONTHLY && (
+              <Monthly byweekday={byweekday as Weekday} setByweekday={setByweekday} />
+            )}
+
+            {frequency === RRule.WEEKLY && (
+              <Weekly byweekday={byweekday as Weekday} setByweekday={setByweekday} />
+            )}
+
+            <Stack space={2}>
+              <Text>Ends</Text>
+              <Flex gap={2} paddingY={2} align="center">
+                <Radio
+                  checked={!count && !until}
+                  name="ends"
+                  onChange={handleEndChange}
+                  value=""
+                  id="ends-never"
+                />
+                <Text htmlFor="ends-never" as="label">
+                  Never
+                </Text>
+              </Flex>
               <Flex gap={2} align="center">
-                <Text style={{whiteSpace: 'nowrap'}}>Repeat every</Text>
-                <Box style={{width: '75px'}}>
-                  <TextInput
-                    name="interval"
-                    type="number"
-                    value={interval}
-                    onChange={handleChange}
+                <Radio
+                  checked={!!until}
+                  name="ends"
+                  onChange={handleEndChange}
+                  value="until"
+                  id="ends-until"
+                />
+                <Text htmlFor="ends-until" as="label" style={{width: '75px'}}>
+                  On
+                </Text>
+                <Box style={{width: '200px'}}>
+                  <DateInput
+                    id="until"
+                    onChange={handleUntilChange}
+                    type={{
+                      name: 'until',
+                      title: 'Date',
+                      options: dateTimeOptions,
+                    }}
+                    value={until ? new Date(until) : getUntilDate()}
+                    disabled={!until}
                   />
-                </Box>
-                <Box>
-                  <Select name="freq" value={frequency} onChange={handleChange}>
-                    <option value={RRule.YEARLY}>years</option>
-                    <option value={RRule.MONTHLY}>months</option>
-                    <option value={RRule.WEEKLY}>weeks</option>
-                    <option value={RRule.DAILY}>days</option>
-                  </Select>
                 </Box>
               </Flex>
-
-              {frequency === RRule.MONTHLY && (
-                <Monthly byweekday={byweekday as Weekday} setByweekday={setByweekday} />
-              )}
-
-              {frequency === RRule.WEEKLY && (
-                <Weekly byweekday={byweekday as Weekday} setByweekday={setByweekday} />
-              )}
-
-              <Stack space={2}>
-                <Text>Ends</Text>
-                <Flex gap={2} paddingY={2} align="center">
-                  <Radio
-                    checked={!count && !until}
-                    name="ends"
-                    onChange={handleEndChange}
-                    value=""
-                    id="ends-never"
+              <Flex gap={2} align="center">
+                <Radio
+                  checked={!!count}
+                  name="ends"
+                  onChange={handleEndChange}
+                  value="count"
+                  id="ends-count"
+                />
+                <Text htmlFor="ends-count" as="label" style={{width: '75px'}}>
+                  After
+                </Text>
+                <Box style={{width: '75px'}}>
+                  <TextInput
+                    name="count"
+                    type="number"
+                    value={count || DEFAULT_COUNTS[frequency]}
+                    onChange={handleChange}
+                    disabled={!count}
                   />
-                  <Text htmlFor="ends-never" as="label">
-                    Never
-                  </Text>
-                </Flex>
-                <Flex gap={2} align="center">
-                  <Radio
-                    checked={!!until}
-                    name="ends"
-                    onChange={handleEndChange}
-                    value="until"
-                    id="ends-until"
-                  />
-                  <Text htmlFor="ends-until" as="label" style={{width: '75px'}}>
-                    On
-                  </Text>
-                  <Box style={{width: '200px'}}>
-                    <DateInput
-                      id="until"
-                      onChange={handleUntilChange}
-                      type={{
-                        name: 'until',
-                        title: 'Date',
-                        options: dateTimeOptions,
-                      }}
-                      value={until ? new Date(until) : getUntilDate()}
-                      disabled={!until}
-                    />
-                  </Box>
-                </Flex>
-                <Flex gap={2} align="center">
-                  <Radio
-                    checked={!!count}
-                    name="ends"
-                    onChange={handleEndChange}
-                    value="count"
-                    id="ends-count"
-                  />
-                  <Text htmlFor="ends-count" as="label" style={{width: '75px'}}>
-                    After
-                  </Text>
-                  <Box style={{width: '75px'}}>
-                    <TextInput
-                      name="count"
-                      type="number"
-                      value={count || DEFAULT_COUNTS[frequency]}
-                      onChange={handleChange}
-                      disabled={!count}
-                    />
-                  </Box>
-                  <Text style={{whiteSpace: 'nowrap'}}>occurrences</Text>
-                </Flex>
-              </Stack>
+                </Box>
+                <Text style={{whiteSpace: 'nowrap'}}>occurrences</Text>
+              </Flex>
             </Stack>
-          </Box>
-          <Box paddingX={4} paddingY={3} style={{borderTop: '1px solid var(--card-border-color)'}}>
-            <Flex gap={2} justify="flex-end">
-              <Button text="Cancel" mode="ghost" onClick={onClose} />
-              <Button text="Done" tone="positive" onClick={handleConfirm} />
-            </Flex>
-          </Box>
-        </Flex>
-      </Dialog>
-    )
+          </Stack>
+        </Box>
+        <Box paddingX={4} paddingY={3} style={{borderTop: '1px solid var(--card-border-color)'}}>
+          <Flex gap={2} justify="flex-end">
+            <Button text="Cancel" mode="ghost" onClick={onClose} />
+            <Button text="Done" tone="positive" onClick={handleConfirm} />
+          </Flex>
+        </Box>
+      </Flex>
+    </Dialog>
+  ) : (
+    <></>
   )
 }
