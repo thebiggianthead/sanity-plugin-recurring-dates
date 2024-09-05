@@ -2,7 +2,13 @@ import {Box, Flex, Grid, Select, Stack, Text} from '@sanity/ui'
 import {upperFirst} from 'lodash'
 import React, {useCallback, useState} from 'react'
 import {rrulestr} from 'rrule'
-import {ObjectInputMember, type ObjectInputProps, ObjectSchemaType, set} from 'sanity'
+import {
+  ObjectInputMember,
+  type ObjectInputProps,
+  type ObjectSchemaType,
+  type Rule,
+  set,
+} from 'sanity'
 import {Feedback} from 'sanity-plugin-utils'
 
 import type {PluginConfig, WithRequiredProperty} from '../types'
@@ -21,7 +27,7 @@ type RecurringDateObjectSchemaType = Omit<ObjectSchemaType, 'options'> & {
 export function RecurringDates(props: RecurringDatesProps): React.JSX.Element {
   const {onChange, members, value: currentValue, schemaType, pluginConfig} = props
   const {options, title}: RecurringDateObjectSchemaType = schemaType
-  const {defaultRecurrences, hideEndDate, hideCustom, dateTimeOptions, dateOnly} = {
+  const {defaultRecurrences, hideEndDate, hideCustom, dateTimeOptions, dateOnly, validation} = {
     ...pluginConfig,
     ...options,
   }
@@ -104,8 +110,19 @@ export function RecurringDates(props: RecurringDatesProps): React.JSX.Element {
     }
   }
 
+  // Add custom validation to the start and end date fields
+  if (validation?.startDate && startDateMember?.kind == 'field') {
+    startDateMember.field.schemaType.validation = (CustomValidation) =>
+      validation?.startDate?.(CustomValidation) as Rule
+  }
+
+  if (validation?.endDate && endDateMember?.kind == 'field') {
+    endDateMember.field.schemaType.validation = (CustomValidation) =>
+      validation?.endDate?.(CustomValidation) as Rule
+  }
+
   // Do we have an end date set for this field?
-  const hasEndDate = currentValue && currentValue.endDate
+  const hasEndDate = currentValue?.endDate
 
   return (
     <Stack space={3}>
