@@ -1,6 +1,6 @@
 {
   "name": "sanity-plugin-recurring-dates",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Add a custom input component to your Sanity Studio to manage recurring dates (e.g. for events)",
   "keywords": [
     "sanity",

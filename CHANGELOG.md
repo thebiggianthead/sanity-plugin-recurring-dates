@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/compare/v1.1.1...v1.2.0) (2024-09-05)
+
+### Features
+
+- date validation ([50d6449](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/commit/50d64495b15628ae55345fe9af9d6e40a773a05a))
+
 ## [1.1.1](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/compare/v1.1.0...v1.1.1) (2024-06-12)
 
 ### Bug Fixes
