@@ -18,24 +18,16 @@ export default (
         name: 'startDate',
         type: dateOnly ? 'date' : 'datetime',
         options: dateTimeOptions,
-        validation: (Rule) => {
-          if (validation?.startDate) {
-            return validation.startDate(Rule)
-          }
-          return Rule.required()
-        },
+        validation: (Rule) =>
+          validation?.startDate ? validation.startDate(Rule) : Rule.required(),
       }),
       defineField({
         title: 'End Date',
         name: 'endDate',
         type: dateOnly ? 'date' : 'datetime',
         options: dateTimeOptions,
-        validation: (Rule) => {
-          if (validation?.endDate) {
-            return validation.endDate(Rule)
-          }
-          return Rule.min(Rule.valueOfField('startDate'))
-        },
+        validation: (Rule) =>
+          validation?.endDate ? validation.endDate(Rule) : Rule.min(Rule.valueOfField('startDate')),
       }),
       defineField({
         title: 'Recurring event',
