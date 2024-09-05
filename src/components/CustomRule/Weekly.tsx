@@ -9,7 +9,7 @@ interface WeeklyProps {
   setByweekday: (value: Options['byweekday']) => void
 }
 
-export function Weekly(props: WeeklyProps) {
+export function Weekly(props: WeeklyProps): React.JSX.Element {
   const {byweekday, setByweekday} = props
 
   const currentWeekdays: number[] = useMemo(() => {

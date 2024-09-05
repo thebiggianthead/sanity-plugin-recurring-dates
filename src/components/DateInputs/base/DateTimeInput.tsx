@@ -1,7 +1,8 @@
+import {CalendarIcon} from '@sanity/icons'
+import {Box, Button, LayerProvider, Popover, useClickOutside, useForwardedRef} from '@sanity/ui'
 import React, {forwardRef, useCallback, useRef, useState} from 'react'
 import FocusLock from 'react-focus-lock'
-import {Box, Button, LayerProvider, Popover, useClickOutside, useForwardedRef} from '@sanity/ui'
-import {CalendarIcon} from '@sanity/icons'
+
 import {DatePicker} from './DatePicker'
 import {LazyTextInput} from './LazyTextInput'
 
@@ -10,7 +11,9 @@ export interface DateTimeInputProps {
   id?: string
   inputValue?: string
   onChange: (date: Date | null) => void
-  onInputChange?: (event: React.FocusEvent<HTMLInputElement>) => void
+  onInputChange?: (
+    event: React.FocusEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement>,
+  ) => void
   placeholder?: string
   readOnly?: boolean
   selectTime?: boolean
@@ -20,7 +23,7 @@ export interface DateTimeInputProps {
 
 export const DateTimeInput = forwardRef(function DateTimeInput(
   props: DateTimeInputProps,
-  ref: React.ForwardedRef<HTMLInputElement>
+  ref: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {value, inputValue, onInputChange, onChange, selectTime, timeStep, ...rest} = props
   const [popoverRef, setPopoverRef] = useState<HTMLElement | null>(null)
@@ -36,6 +39,7 @@ export const DateTimeInput = forwardRef(function DateTimeInput(
     forwardedRef.current?.select()
   }, [forwardedRef])
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleKeyUp = useCallback((e: any) => {
     if (e.key === 'Escape') {
       setPickerOpen(false)

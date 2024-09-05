@@ -1,10 +1,12 @@
-import {defineField} from 'sanity'
+import {defineField, SchemaTypeDefinition} from 'sanity'
 
 import {RecurringDates} from '../components/RecurringDate'
 import {PluginConfig, WithRequiredProperty} from '../types'
 
-export default (config: WithRequiredProperty<PluginConfig, 'defaultRecurrences'>) => {
-  const {dateTimeOptions, dateOnly} = config
+export default (
+  config: WithRequiredProperty<PluginConfig, 'defaultRecurrences'>,
+): SchemaTypeDefinition => {
+  const {dateTimeOptions, dateOnly, validation} = config
 
   return defineField({
     name: 'recurringDates',
@@ -16,14 +18,16 @@ export default (config: WithRequiredProperty<PluginConfig, 'defaultRecurrences'>
         name: 'startDate',
         type: dateOnly ? 'date' : 'datetime',
         options: dateTimeOptions,
-        validation: (Rule) => Rule.required(),
+        validation: (Rule) =>
+          validation?.startDate ? validation.startDate(Rule) : Rule.required(),
       }),
       defineField({
         title: 'End Date',
         name: 'endDate',
         type: dateOnly ? 'date' : 'datetime',
         options: dateTimeOptions,
-        validation: (Rule) => Rule.min(Rule.valueOfField('startDate')),
+        validation: (Rule) =>
+          validation?.endDate ? validation.endDate(Rule) : Rule.min(Rule.valueOfField('startDate')),
       }),
       defineField({
         title: 'Recurring event',

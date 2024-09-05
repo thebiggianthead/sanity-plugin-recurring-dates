@@ -2,6 +2,7 @@ import {TrashIcon, WarningOutlineIcon} from '@sanity/icons'
 import {Box, Button, Card, Flex, Stack, Text} from '@sanity/ui'
 import {upperFirst} from 'lodash'
 import {useCallback} from 'react'
+import React from 'react'
 import {type ObjectInputProps, unset} from 'sanity'
 
 export function RemoveEndDate({
@@ -10,7 +11,7 @@ export function RemoveEndDate({
 }: {
   title?: string
   onChange: ObjectInputProps['onChange']
-}) {
+}): React.JSX.Element {
   // Update the RRULE field when the select changes
   const handleUnsetClick = useCallback(() => {
     onChange(unset(['endDate']))
@@ -39,7 +40,7 @@ export function RemoveEndDate({
             tone="critical"
             text={<>Remove end date</>}
             onClick={handleUnsetClick}
-            width="100%"
+            width="fill"
           />
         </Stack>
       </Flex>

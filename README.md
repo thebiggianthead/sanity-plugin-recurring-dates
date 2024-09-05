@@ -108,6 +108,12 @@ defineField({
 
     // Changes the date picker to date only, no time
     dateOnly: true, // defaults to false
+
+    // override the default validation
+    validation: {
+      startDate: (Rule) => Rule.required() // defaults to (Rule) => Rule.required()
+      endDate: (Rule) => Rule.min(Rule.valueOfField('startDate')) // defaults to (Rule) => Rule.min(Rule.valueOfField('startDate'))
+    }
   },
 })
 ```

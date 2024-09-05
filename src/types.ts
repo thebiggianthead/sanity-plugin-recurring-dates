@@ -1,4 +1,4 @@
-import type {DatetimeOptions, ObjectDefinition} from 'sanity'
+import type {DateRule, DatetimeOptions, ObjectDefinition} from 'sanity'
 
 export interface PluginConfig {
   defaultRecurrences?: string[]
@@ -6,6 +6,10 @@ export interface PluginConfig {
   hideCustom?: boolean
   dateTimeOptions?: DatetimeOptions
   dateOnly?: boolean
+  validation?: {
+    startDate?: (Rule: DateRule) => DateRule
+    endDate?: (Rule: DateRule) => DateRule
+  }
 }
 
 export type WithRequiredProperty<Type, Key extends keyof Type> = Type & {

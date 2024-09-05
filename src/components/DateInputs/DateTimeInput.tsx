@@ -77,7 +77,7 @@ function enforceTimeStep(dateString: string, timeStep: number) {
 /**
  * @hidden
  * @beta */
-export function DateTimeInput(props: DateTimeInputProps) {
+export function DateTimeInput(props: DateTimeInputProps): React.JSX.Element {
   const {id, onChange, type, value, disabled, ...rest} = props
 
   const {dateFormat, timeFormat, timeStep} = parseOptions(type.options)
