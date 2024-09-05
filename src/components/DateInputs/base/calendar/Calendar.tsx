@@ -110,6 +110,7 @@ export const Calendar = forwardRef(function Calendar(
   }, [ref])
 
   const handleKeyDown = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (event: any) => {
       if (!ARROW_KEYS.includes(event.key)) {
         return

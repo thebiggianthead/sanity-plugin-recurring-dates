@@ -9,7 +9,7 @@ interface MonthlyProps {
   setByweekday: (value: Options['byweekday']) => void
 }
 
-export function Monthly(props: MonthlyProps) {
+export function Monthly(props: MonthlyProps): React.JSX.Element {
   const {byweekday, setByweekday} = props
 
   const {weekday: dayNo, n: weekNo} =

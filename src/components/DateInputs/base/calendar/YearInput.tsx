@@ -8,7 +8,7 @@ type Props = Omit<React.ComponentProps<typeof TextInput>, 'onChange' | 'value'> 
   onChange: (year: number) => void
 }
 
-export const YearInput = ({onChange, ...props}: Props) => {
+export const YearInput = ({onChange, ...props}: Props): React.JSX.Element => {
   const handleChange = React.useCallback(
     (event: React.FocusEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement>) => {
       const numericValue = parseInt(event.currentTarget.value, 10)

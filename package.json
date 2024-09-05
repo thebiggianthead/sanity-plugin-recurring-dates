@@ -82,10 +82,11 @@
     "typescript": "^5.5.4"
   },
   "peerDependencies": {
-    "react": "^18",
-    "sanity": "^3",
+    "@sanity/icons": ">= 2",
     "@sanity/ui": "^1 || ^2.0.0-beta",
-    "@sanity/icons": ">= 2"
+    "@sanity/util": "^3.57.0",
+    "react": "^18",
+    "sanity": "^3"
   },
   "engines": {
     "node": ">=14"

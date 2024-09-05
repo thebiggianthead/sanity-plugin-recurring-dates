@@ -45,7 +45,7 @@ const serialize = (date: Date) => format(date, VALUE_FORMAT)
 /**
  * @hidden
  * @beta */
-export function DateInput(props: DateInputProps) {
+export function DateInput(props: DateInputProps): React.JSX.Element {
   const {id, onChange, type, value, disabled, ...rest} = props
 
   const {dateFormat} = parseOptions(type.options)

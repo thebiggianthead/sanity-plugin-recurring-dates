@@ -15,6 +15,7 @@ export const DatePicker = React.forwardRef(function DatePicker(
   const [focusedDate, setFocusedDay] = React.useState<Date>()
 
   const handleSelect = React.useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (nextDate: any) => {
       onChange(nextDate)
       setFocusedDay(undefined)

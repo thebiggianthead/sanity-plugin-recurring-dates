@@ -11,7 +11,9 @@ export interface DateTimeInputProps {
   id?: string
   inputValue?: string
   onChange: (date: Date | null) => void
-  onInputChange?: (event: React.FocusEvent<HTMLInputElement>) => void
+  onInputChange?: (
+    event: React.FocusEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement>,
+  ) => void
   placeholder?: string
   readOnly?: boolean
   selectTime?: boolean
@@ -37,6 +39,7 @@ export const DateTimeInput = forwardRef(function DateTimeInput(
     forwardedRef.current?.select()
   }, [forwardedRef])
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleKeyUp = useCallback((e: any) => {
     if (e.key === 'Escape') {
       setPickerOpen(false)
