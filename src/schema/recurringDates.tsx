@@ -1,6 +1,8 @@
+import {CalendarIcon} from '@sanity/icons'
 import {defineField, SchemaTypeDefinition} from 'sanity'
 
 import {RecurringDates} from '../components/RecurringDate'
+import {RecurringDatesPreview} from '../components/RecurringDatesPreview'
 import {PluginConfig, WithRequiredProperty} from '../types'
 
 export default (
@@ -12,6 +14,7 @@ export default (
     name: 'recurringDates',
     title: 'Dates',
     type: 'object',
+    icon: CalendarIcon,
     fields: [
       defineField({
         title: 'Start Date',
@@ -43,6 +46,14 @@ export default (
     ],
     components: {
       input: (props) => RecurringDates({...props, pluginConfig: config}),
+      preview: (props) => RecurringDatesPreview({...props, pluginConfig: config}),
+    },
+    preview: {
+      select: {
+        startDate: 'startDate',
+        endDate: 'endDate',
+        rrule: 'rrule',
+      },
     },
   })
 }
