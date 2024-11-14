@@ -30,7 +30,9 @@ export function CustomRule({
 
   const [frequency, setFrequency] = useState<Options['freq']>(initialRule.origOptions.freq || 1)
   const [interval, setInterval] = useState<Options['interval']>(
-    initialRule.origOptions.interval || 1,
+    initialRule.origOptions.interval && initialRule.origOptions.interval > 0
+      ? initialRule.origOptions.interval
+      : 1,
   )
   const [count, setCount] = useState<Options['count']>(initialRule.origOptions.count || null)
   const [until, setUntil] = useState<Options['until'] | number>(
@@ -47,7 +49,7 @@ export function CustomRule({
       if (name === 'freq') {
         setFrequency(Number(value))
       } else if (name === 'interval') {
-        setInterval(Number(value))
+        setInterval(Number(value) > 1 ? Number(value) : 1)
       } else if (name === 'count') {
         setCount(Number(value))
       }
@@ -125,14 +127,20 @@ export function CustomRule({
             <Flex gap={2} align="center">
               <Text style={{whiteSpace: 'nowrap'}}>Repeat every</Text>
               <Box style={{width: '75px'}}>
-                <TextInput name="interval" type="number" value={interval} onChange={handleChange} />
+                <TextInput
+                  name="interval"
+                  type="number"
+                  min={1}
+                  value={interval}
+                  onChange={handleChange}
+                />
               </Box>
               <Box>
                 <Select name="freq" value={frequency} onChange={handleChange}>
-                  <option value={RRule.YEARLY}>years</option>
-                  <option value={RRule.MONTHLY}>months</option>
-                  <option value={RRule.WEEKLY}>weeks</option>
-                  <option value={RRule.DAILY}>days</option>
+                  <option value={RRule.YEARLY}>year(s)</option>
+                  <option value={RRule.MONTHLY}>month(s)</option>
+                  <option value={RRule.WEEKLY}>week(s)</option>
+                  <option value={RRule.DAILY}>day(s)</option>
                 </Select>
               </Box>
             </Flex>
@@ -204,7 +212,7 @@ export function CustomRule({
                     disabled={!count}
                   />
                 </Box>
-                <Text style={{whiteSpace: 'nowrap'}}>occurrences</Text>
+                <Text style={{whiteSpace: 'nowrap'}}>occurrence(s)</Text>
               </Flex>
             </Stack>
           </Stack>
