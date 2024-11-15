@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "@sanity/incompatible-plugin": "^1.0.4",
+    "date-fns-tz": "^3.2.0",
     "lodash": "^4.17.21",
     "rrule": "^2.7.2",
     "sanity-plugin-utils": "^1.6.2"

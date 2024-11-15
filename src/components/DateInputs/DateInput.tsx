@@ -16,8 +16,8 @@ interface SchemaOptions {
 type DateInputProps = {
   id: string
   onChange: (date: string | null) => void
-  disabled?: boolean
-  value: number | Date | null
+  readOnly?: boolean
+  value: string | undefined
   type: {
     name: string
     title: string
@@ -46,13 +46,13 @@ const serialize = (date: Date) => format(date, VALUE_FORMAT)
  * @hidden
  * @beta */
 export function DateInput(props: DateInputProps): React.JSX.Element {
-  const {id, onChange, type, value, disabled, ...rest} = props
+  const {id, onChange, type, value, readOnly, ...rest} = props
 
   const {dateFormat} = parseOptions(type.options)
 
   const handleChange = useCallback(
     (nextDate: string | null) => {
-      onChange(nextDate)
+      onChange(nextDate || null)
     },
     [onChange],
   )
@@ -72,7 +72,7 @@ export function DateInput(props: DateInputProps): React.JSX.Element {
       formatInputValue={formatInputValue}
       onChange={handleChange}
       parseInputValue={parseInputValue}
-      readOnly={disabled}
+      readOnly={readOnly}
       selectTime={false}
       serialize={serialize}
       value={value}

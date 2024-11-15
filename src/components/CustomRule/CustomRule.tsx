@@ -1,4 +1,5 @@
 import {Box, Button, Dialog, Flex, Radio, Select, Stack, Text, TextInput} from '@sanity/ui'
+import {format, toDate} from 'date-fns-tz'
 import React, {useCallback, useMemo, useState} from 'react'
 import {Options, RRule, rrulestr, Weekday} from 'rrule'
 import {type ObjectInputProps, set} from 'sanity'
@@ -70,12 +71,14 @@ export function CustomRule({
       fromDate.setDate(fromDate.getDate() + DEFAULT_COUNTS[frequency])
     }
 
+    fromDate.setHours(23, 59, 59, 999)
+
     return fromDate
   }, [frequency, startDate])
 
   const handleUntilChange = useCallback((date: string | null) => {
     if (date) {
-      setUntil(new Date(date))
+      setUntil(toDate(`${date}T23:59:59`))
     }
   }, [])
 
@@ -112,6 +115,8 @@ export function CustomRule({
     onClose()
     onChange(set(newRule.toString(), ['rrule']))
   }, [byweekday, count, frequency, interval, onChange, onClose, until])
+
+  const formatUntilValue = useCallback((date: Date) => format(date, 'yyyy-MM-dd'), [])
 
   return open ? (
     <Dialog
@@ -187,8 +192,10 @@ export function CustomRule({
                       title: 'Date',
                       options: dateTimeOptions,
                     }}
-                    value={until ? new Date(until) : getUntilDate()}
-                    disabled={!until}
+                    value={
+                      until ? formatUntilValue(new Date(until)) : formatUntilValue(getUntilDate())
+                    }
+                    readOnly={!until}
                   />
                 </Box>
               </Flex>
