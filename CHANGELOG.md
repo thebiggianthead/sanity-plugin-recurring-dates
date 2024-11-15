@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/compare/v1.3.0...v1.3.1) (2024-11-15)
+
+### Bug Fixes
+
+- until date timezone support ([#23](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/issues/23)) ([08756b0](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/commit/08756b05b4d8883abf49266acc7ecc83ef2ce612))
+
 ## [1.3.0](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/compare/v1.2.0...v1.3.0) (2024-10-25)
 
 ### Features
