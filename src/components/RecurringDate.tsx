@@ -1,7 +1,7 @@
 import {Box, Flex, Grid, Select, Stack, Text} from '@sanity/ui'
 import {upperFirst} from 'lodash'
 import React, {useCallback, useState} from 'react'
-import {rrulestr} from 'rrule'
+import {datetime, rrulestr} from 'rrule'
 import {
   ObjectInputMember,
   type ObjectInputProps,
@@ -156,6 +156,17 @@ export function RecurringDates(props: RecurringDatesProps): React.JSX.Element {
               return null
             }
             const rule = rrulestr(recurrence)
+
+            rule.options.until =
+              rule?.options?.until &&
+              datetime(
+                rule?.options?.until?.getFullYear(),
+                rule?.options?.until?.getMonth() + 1,
+                rule?.options?.until?.getDate(),
+                rule?.options?.until?.getHours(),
+                rule?.options?.until?.getMinutes(),
+                rule?.options?.until?.getSeconds(),
+              )
 
             return (
               <option key={recurrence} value={recurrence}>

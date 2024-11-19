@@ -1,7 +1,7 @@
 import {DEFAULT_DATE_FORMAT, DEFAULT_TIME_FORMAT, format} from '@sanity/util/legacyDateFormat'
 import {upperFirst} from 'lodash'
 import React from 'react'
-import {rrulestr} from 'rrule'
+import {datetime, rrulestr} from 'rrule'
 import type {ObjectSchemaType, PreviewProps} from 'sanity'
 
 import type {PluginConfig, RecurringDate, WithRequiredProperty} from '../types'
@@ -25,6 +25,19 @@ export function RecurringDatesPreview(props: CastPreviewProps): React.JSX.Elemen
   }
 
   const rule = rrule && rrulestr(rrule)
+
+  if (rule) {
+    rule.options.until =
+      rule?.options?.until &&
+      datetime(
+        rule?.options?.until?.getFullYear(),
+        rule?.options?.until?.getMonth() + 1,
+        rule?.options?.until?.getDate(),
+        rule?.options?.until?.getHours(),
+        rule?.options?.until?.getMinutes(),
+        rule?.options?.until?.getSeconds(),
+      )
+  }
 
   const dateFormat = dateTimeOptions?.dateFormat || DEFAULT_DATE_FORMAT
   const timeFormat = dateTimeOptions?.timeFormat || DEFAULT_TIME_FORMAT
