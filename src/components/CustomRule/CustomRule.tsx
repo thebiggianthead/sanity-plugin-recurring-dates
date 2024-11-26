@@ -86,7 +86,10 @@ export function CustomRule({
       if (date) {
         const untilDate = toDate(`${date}T23:59:59`)
 
-        if (endDate && untilDate < toDate(endDate)) {
+        if (
+          (endDate && untilDate < toDate(endDate)) ||
+          (startDate && untilDate < toDate(startDate))
+        ) {
           setUntilValid(false)
         } else {
           setUntilValid(true)
@@ -95,7 +98,7 @@ export function CustomRule({
         setUntil(untilDate)
       }
     },
-    [endDate],
+    [endDate, startDate],
   )
 
   const handleEndChange = useCallback(
@@ -216,7 +219,7 @@ export function CustomRule({
                 </Box>
                 {!untilValid && (
                   <Feedback tone="critical">
-                    <Text size={1}>Until date must be after event end date</Text>
+                    <Text size={1}>Until date must be after event ends</Text>
                   </Feedback>
                 )}
               </Flex>
