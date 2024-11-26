@@ -71,6 +71,17 @@ export default defineConfig({
 
       // Changes the date picker to date only, no time
       dateOnly: true, // defaults to false
+
+      // Change the field titles and descriptions
+      // field names will remain "startDate" and "endDate"
+      fieldTitles: {
+        startDate: 'Event starts',
+        endDate: 'Event ends',
+      },
+      fieldDescriptions: {
+        startDate: 'This is the date the event starts',
+        endDate: 'This is the date the event ends',
+      },
     }),
   ],
 })
@@ -114,6 +125,17 @@ defineField({
       startDate: (Rule) => Rule.required() // defaults to (Rule) => Rule.required()
       endDate: (Rule) => Rule.min(Rule.valueOfField('startDate')) // defaults to (Rule) => Rule.min(Rule.valueOfField('startDate'))
     }
+
+    // Change the field titles and descriptions
+    // field names will remain "startDate" and "endDate"
+    fieldTitles: {
+      startDate: 'Event starts',
+      endDate: 'Event ends',
+    },
+    fieldDescriptions: {
+      startDate: 'This is the date the event starts',
+      endDate: 'This is the date the event ends',
+    },
   },
 })
 ```

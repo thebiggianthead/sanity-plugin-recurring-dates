@@ -82,6 +82,31 @@ export function RecurringDates(props: RecurringDatesProps): React.JSX.Element {
       ...startDateMember?.field?.schemaType.options,
       ...dateTimeOptions,
     }
+
+    // Ensure the right schemaType is set
+    if (dateOnly === true) {
+      startDateMember.field.schemaType.name = 'date'
+    } else {
+      startDateMember.field.schemaType.name = 'datetime'
+    }
+
+    // Add custom validation to the start date field
+    if (validation?.startDate) {
+      startDateMember.field.schemaType.validation = (CustomValidation) =>
+        validation?.startDate?.(CustomValidation) as Rule
+    } else {
+      startDateMember.field.schemaType.validation = (DefaultRule) => DefaultRule.required() as Rule
+    }
+
+    // Add custom title to the start date field
+    if (options?.fieldTitles?.startDate) {
+      startDateMember.field.schemaType.title = options.fieldTitles.startDate
+    }
+
+    // Add custom description to the start date field
+    if (options?.fieldDescriptions?.startDate) {
+      startDateMember.field.schemaType.description = options.fieldDescriptions.startDate
+    }
   }
 
   if (endDateMember?.kind == 'field') {
@@ -89,36 +114,32 @@ export function RecurringDates(props: RecurringDatesProps): React.JSX.Element {
       ...endDateMember?.field?.schemaType.options,
       ...dateTimeOptions,
     }
-  }
 
-  if (dateOnly === true) {
-    if (startDateMember?.kind == 'field') {
-      startDateMember.field.schemaType.name = 'date'
-    }
-
-    if (endDateMember?.kind == 'field') {
+    // Ensure the right schemaType is set
+    if (dateOnly === true) {
       endDateMember.field.schemaType.name = 'date'
-    }
-  } else {
-    // we need to explicitly set the schemaType to datetime
-    if (startDateMember?.kind == 'field') {
-      startDateMember.field.schemaType.name = 'datetime'
-    }
-
-    if (endDateMember?.kind == 'field') {
+    } else {
       endDateMember.field.schemaType.name = 'datetime'
     }
-  }
 
-  // Add custom validation to the start and end date fields
-  if (validation?.startDate && startDateMember?.kind == 'field') {
-    startDateMember.field.schemaType.validation = (CustomValidation) =>
-      validation?.startDate?.(CustomValidation) as Rule
-  }
+    // Add custom validation to the end date field
+    if (validation?.endDate) {
+      endDateMember.field.schemaType.validation = (CustomValidation) =>
+        validation?.endDate?.(CustomValidation) as Rule
+    } else {
+      endDateMember.field.schemaType.validation = (DefaultRule) =>
+        DefaultRule.min(DefaultRule.valueOfField('startDate')) as Rule
+    }
 
-  if (validation?.endDate && endDateMember?.kind == 'field') {
-    endDateMember.field.schemaType.validation = (CustomValidation) =>
-      validation?.endDate?.(CustomValidation) as Rule
+    // Add custom title to the end date field
+    if (options?.fieldTitles?.endDate) {
+      endDateMember.field.schemaType.title = options.fieldTitles.endDate
+    }
+
+    // Add custom description to the end date field
+    if (options?.fieldDescriptions?.endDate) {
+      endDateMember.field.schemaType.description = options.fieldDescriptions.endDate
+    }
   }
 
   // Do we have an end date set for this field?
@@ -185,6 +206,9 @@ export function RecurringDates(props: RecurringDatesProps): React.JSX.Element {
         initialValue={currentValue?.rrule}
         startDate={
           startDateMember?.kind == 'field' ? (startDateMember?.field?.value as string) : undefined
+        }
+        endDate={
+          endDateMember?.kind == 'field' ? (endDateMember?.field?.value as string) : undefined
         }
         dateTimeOptions={dateTimeOptions}
       />

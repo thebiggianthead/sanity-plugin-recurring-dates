@@ -10,6 +10,14 @@ export interface PluginConfig {
     startDate?: (Rule: DateRule) => DateRule
     endDate?: (Rule: DateRule) => DateRule
   }
+  fieldTitles?: {
+    startDate?: string
+    endDate?: string
+  }
+  fieldDescriptions?: {
+    startDate?: string
+    endDate?: string
+  }
 }
 
 export type WithRequiredProperty<Type, Key extends keyof Type> = Type & {
