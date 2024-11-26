@@ -8,7 +8,7 @@ import {PluginConfig, WithRequiredProperty} from '../types'
 export default (
   config: WithRequiredProperty<PluginConfig, 'defaultRecurrences'>,
 ): SchemaTypeDefinition => {
-  const {dateTimeOptions, dateOnly, validation} = config
+  const {dateTimeOptions, dateOnly, validation, fieldTitles, fieldDescriptions} = config
 
   return defineField({
     name: 'recurringDates',
@@ -17,7 +17,8 @@ export default (
     icon: CalendarIcon,
     fields: [
       defineField({
-        title: 'Start Date',
+        title: fieldTitles?.startDate || 'Start Date',
+        description: fieldDescriptions?.startDate || '',
         name: 'startDate',
         type: dateOnly ? 'date' : 'datetime',
         options: dateTimeOptions,
@@ -25,7 +26,8 @@ export default (
           validation?.startDate ? validation.startDate(Rule) : Rule.required(),
       }),
       defineField({
-        title: 'End Date',
+        title: fieldTitles?.endDate || 'End Date',
+        description: fieldDescriptions?.endDate || '',
         name: 'endDate',
         type: dateOnly ? 'date' : 'datetime',
         options: dateTimeOptions,
