@@ -3,6 +3,7 @@ import {format, toDate} from 'date-fns-tz'
 import React, {useCallback, useMemo, useState} from 'react'
 import {Options, RRule, rrulestr, Weekday} from 'rrule'
 import {type ObjectInputProps, set} from 'sanity'
+import {Feedback} from 'sanity-plugin-utils'
 
 import {DEFAULT_COUNTS} from '../../constants'
 import {PluginConfig} from '../../types'
@@ -16,13 +17,15 @@ export function CustomRule({
   onChange,
   initialValue,
   startDate,
+  endDate,
   dateTimeOptions,
 }: {
   open: boolean
   onClose: () => void
   onChange: ObjectInputProps['onChange']
   initialValue: string
-  startDate: string | undefined
+  startDate?: string
+  endDate?: string
   dateTimeOptions: PluginConfig['dateTimeOptions']
 }): React.JSX.Element {
   const initialRule = useMemo(() => {
@@ -42,6 +45,8 @@ export function CustomRule({
   const [byweekday, setByweekday] = useState<Options['byweekday']>(
     initialRule.origOptions.byweekday || null,
   )
+
+  const [untilValid, setUntilValid] = useState<boolean>(true)
 
   const handleChange = useCallback(
     (event: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLSelectElement>) => {
@@ -76,11 +81,22 @@ export function CustomRule({
     return fromDate
   }, [frequency, startDate])
 
-  const handleUntilChange = useCallback((date: string | null) => {
-    if (date) {
-      setUntil(toDate(`${date}T23:59:59`))
-    }
-  }, [])
+  const handleUntilChange = useCallback(
+    (date: string | null) => {
+      if (date) {
+        const untilDate = toDate(`${date}T23:59:59`)
+
+        if (endDate && untilDate < toDate(endDate)) {
+          setUntilValid(false)
+        } else {
+          setUntilValid(true)
+        }
+
+        setUntil(untilDate)
+      }
+    },
+    [endDate],
+  )
 
   const handleEndChange = useCallback(
     (event: React.FormEvent<HTMLInputElement>) => {
@@ -198,6 +214,11 @@ export function CustomRule({
                     readOnly={!until}
                   />
                 </Box>
+                {!untilValid && (
+                  <Feedback tone="critical">
+                    <Text size={1}>Until date must be after event end date</Text>
+                  </Feedback>
+                )}
               </Flex>
               <Flex gap={2} align="center">
                 <Radio
@@ -227,7 +248,7 @@ export function CustomRule({
         <Box paddingX={4} paddingY={3} style={{borderTop: '1px solid var(--card-border-color)'}}>
           <Flex gap={2} justify="flex-end">
             <Button text="Cancel" mode="ghost" onClick={onClose} />
-            <Button text="Done" tone="positive" onClick={handleConfirm} />
+            <Button text="Done" tone="positive" onClick={handleConfirm} disabled={!untilValid} />
           </Flex>
         </Box>
       </Flex>
