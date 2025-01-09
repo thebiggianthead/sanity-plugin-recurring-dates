@@ -1,5 +1,5 @@
 import {Box, Flex, Select, Text} from '@sanity/ui'
-import React, {useCallback} from 'react'
+import React, {useCallback, useEffect} from 'react'
 import {Options, Weekday} from 'rrule'
 
 import {DAYS} from '../../constants'
@@ -33,6 +33,12 @@ export function Monthly(props: MonthlyProps): React.JSX.Element {
     },
     [dayNo, setByweekday, weekNo],
   )
+
+  useEffect(() => {
+    if (!weekNo) {
+      setByweekday(null)
+    }
+  }, [])
 
   return (
     <Flex gap={2} align="center">

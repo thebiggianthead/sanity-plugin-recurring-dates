@@ -126,7 +126,7 @@ export function CustomRule({
       interval,
       count: count || null,
       until: until ? (until as Date) : null,
-      byweekday,
+      byweekday: frequency === RRule.WEEKLY || frequency === RRule.MONTHLY ? byweekday : null,
     }
 
     const newRule = new RRule(newOptions)
