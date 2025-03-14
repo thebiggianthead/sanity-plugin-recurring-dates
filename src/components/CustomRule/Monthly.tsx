@@ -38,7 +38,7 @@ export function Monthly(props: MonthlyProps): React.JSX.Element {
     if (!weekNo) {
       setByweekday(null)
     }
-  }, [])
+  })
 
   return (
     <Flex gap={2} align="center">
