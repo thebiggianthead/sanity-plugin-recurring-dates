@@ -64,9 +64,11 @@ export default defineConfig({
       // Configure the datepickers
       // See https://www.sanity.io/docs/datetime-type#options
       dateTimeOptions: {
-        dateFormat: 'DD/MM/yyyy',
+        dateFormat: 'DD/MM/YYYY',
         timeFormat: 'HH:mm',
         timeStep: 15,
+        displayTimeZone: 'Europe/London',
+        allowTimeZoneSwitch: false,
       },
 
       // Changes the date picker to date only, no time
@@ -112,9 +114,11 @@ defineField({
     // Configure the datepickers
     // See https://www.sanity.io/docs/datetime-type#options
     dateTimeOptions: {
-      dateFormat: 'DD/MM/yyyy',
+      dateFormat: 'DD/MM/YYYY',
       timeFormat: 'HH:mm',
       timeStep: 15,
+      displayTimeZone: 'Europe/London',
+      allowTimeZoneSwitch: false,
     },
 
     // Changes the date picker to date only, no time
