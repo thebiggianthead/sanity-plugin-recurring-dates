@@ -5,6 +5,10 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>2.0.1 (2025-07-25)</small>
+
+- fix(deps): support Studio v4 (#31) ([74ba957](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/commit/74ba957)), closes [#31](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/issues/31)
+
 ## 2.0.0 (2025-03-14)
 
 - feat!: add React 19 support ([a331c93](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/commit/a331c93))
