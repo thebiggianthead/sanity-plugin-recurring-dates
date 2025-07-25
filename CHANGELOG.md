@@ -5,6 +5,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.0.0 (2025-03-14)
+
+- feat!: add React 19 support ([a331c93](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/commit/a331c93))
+- feat!: add react 19 support (#29) ([f58f38f](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/commit/f58f38f)), closes [#29](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/issues/29)
+
+### BREAKING CHANGE
+
+- This version adds support for React 19
+
 ## [1.4.1](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/compare/v1.4.0...v1.4.1) (2025-01-09)
 
 ### Bug Fixes
