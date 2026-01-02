@@ -5,6 +5,10 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>2.0.2 (2026-01-02)</small>
+
+- fix(deps): support studio v5 (#32) ([38e8b68](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/commit/38e8b68)), closes [#32](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/issues/32)
+
 ## <small>2.0.1 (2025-07-25)</small>
 
 - fix(deps): support Studio v4 (#31) ([74ba957](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/commit/74ba957)), closes [#31](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/issues/31)
