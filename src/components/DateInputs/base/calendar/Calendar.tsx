@@ -1,8 +1,9 @@
-import {ChevronLeftIcon, ChevronRightIcon} from '@sanity/icons'
-import {Box, Button, Flex, Grid, Select, Text, useForwardedRef} from '@sanity/ui'
+import {ChevronLeftIcon} from '@sanity/icons/ChevronLeft'
+import {ChevronRightIcon} from '@sanity/icons/ChevronRight'
+import {Box, Button, Flex, Grid, Select, Text} from '@sanity/ui'
 import {addDays, addMonths, setDate, setHours, setMinutes, setMonth, setYear} from 'date-fns'
 import {range} from 'lodash'
-import React, {forwardRef, useCallback, useEffect} from 'react'
+import React, {forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
 
 import {CalendarMonth} from './CalendarMonth'
 import {ARROW_KEYS, DEFAULT_TIME_PRESETS, HOURS_24, MONTH_NAMES} from './constants'
@@ -103,7 +104,8 @@ export const Calendar = forwardRef(function Calendar(
     [onSelect, selectedDate],
   )
 
-  const ref = useForwardedRef(forwardedRef)
+  const ref = useRef<HTMLDivElement>(null)
+  useImperativeHandle(forwardedRef, () => ref.current as HTMLDivElement)
 
   const focusCurrentWeekDay = useCallback(() => {
     ref.current?.querySelector<HTMLElement>(`[data-focused="true"]`)?.focus()
@@ -174,7 +176,7 @@ export const Calendar = forwardRef(function Calendar(
       <Box padding={2}>
         {/* Day presets */}
         {features.dayPresets && (
-          <Grid columns={3} data-ui="CalendaryDayPresets" gap={1}>
+          <Grid gridTemplateColumns={3} data-ui="CalendaryDayPresets" gap={1}>
             <Button text="Yesterday" mode="bleed" fontSize={1} onClick={handleYesterdayClick} />
             <Button text="Today" mode="bleed" fontSize={1} onClick={handleTodayClick} />
             <Button text="Tomorrow" mode="bleed" fontSize={1} onClick={handleTomorrowClick} />

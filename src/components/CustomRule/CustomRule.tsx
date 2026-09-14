@@ -147,7 +147,7 @@ export function CustomRule({
     >
       <Flex direction="column">
         <Box flex={1} overflow="auto" padding={4}>
-          <Stack space={4}>
+          <Stack gap={4}>
             <Flex gap={2} align="center">
               <Text style={{whiteSpace: 'nowrap'}}>Repeat every</Text>
               <Box style={{width: '75px'}}>
@@ -177,7 +177,7 @@ export function CustomRule({
               <Weekly byweekday={byweekday as Weekday} setByweekday={setByweekday} />
             )}
 
-            <Stack space={2}>
+            <Stack gap={2}>
               <Text>Ends</Text>
               <Flex gap={2} paddingY={2} align="center">
                 <Radio

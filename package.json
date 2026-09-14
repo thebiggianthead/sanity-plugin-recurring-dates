@@ -47,9 +47,9 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@sanity/icons": ">= 2",
+    "@sanity/icons": ">= 5",
     "@sanity/incompatible-plugin": "^1.0.5",
-    "@sanity/ui": "^3",
+    "@sanity/ui": "^4",
     "date-fns-tz": "^3.2.0",
     "lodash": "^4.17.21",
     "rrule": "^2.7.2",
@@ -87,8 +87,8 @@
     "typescript": "^5.8.2"
   },
   "peerDependencies": {
-    "@sanity/icons": ">= 2",
-    "@sanity/ui": ">= 2",
+    "@sanity/icons": ">= 5",
+    "@sanity/ui": ">= 4",
     "@sanity/util": "^4",
     "react": "^18.3 || ^19",
     "react-dom": "^18.3 || ^19",

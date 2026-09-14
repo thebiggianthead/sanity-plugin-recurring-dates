@@ -1,4 +1,4 @@
-import {CalendarIcon} from '@sanity/icons'
+import {CalendarIcon} from '@sanity/icons/Calendar'
 import {defineField, SchemaTypeDefinition} from 'sanity'
 
 import {RecurringDates} from '../components/RecurringDate'
