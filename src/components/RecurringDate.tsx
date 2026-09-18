@@ -146,8 +146,8 @@ export function RecurringDates(props: RecurringDatesProps): React.JSX.Element {
   const hasEndDate = currentValue?.endDate
 
   return (
-    <Stack space={3}>
-      <Grid columns={hideEndDate ? 1 : 2} gap={3}>
+    <Stack gap={3}>
+      <Grid gridTemplateColumns={hideEndDate ? 1 : 2} gap={3}>
         {hasEndDate && hideEndDate && <RemoveEndDate title={title} onChange={onChange} />}
         <Flex align="flex-end" gap={2}>
           <Box flex={1}>

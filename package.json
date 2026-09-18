@@ -47,13 +47,14 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@sanity/icons": ">= 2",
+    "@sanity/icons": ">= 5",
     "@sanity/incompatible-plugin": "^1.0.5",
-    "@sanity/ui": "^3",
+    "@sanity/ui": "^4",
     "date-fns-tz": "^3.2.0",
     "lodash": "^4.17.21",
+    "react-focus-lock": "^2.13.7",
     "rrule": "^2.7.2",
-    "sanity-plugin-utils": "^1.6.2"
+    "sanity-plugin-utils": "^2"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",
@@ -62,8 +63,8 @@
     "@sanity/plugin-kit": "^4.0.19",
     "@sanity/semantic-release-preset": "^5.0.0",
     "@types/lodash": "^4.17.16",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "^19.2",
+    "@types/react-dom": "^19.2",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
     "@typescript-eslint/parser": "^8.26.1",
     "eslint": "^8.57.1",
@@ -78,24 +79,30 @@
     "npm-run-all2": "^5.0.0",
     "prettier": "^3.5.3",
     "prettier-plugin-packagejson": "^2.5.10",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-is": "^19.0.0",
+    "react": "^19.2",
+    "react-dom": "^19.2",
+    "react-is": "^19.2",
     "rimraf": "^5.0.1",
-    "sanity": "^5",
-    "styled-components": "^6.1.15",
+    "sanity": "^6",
+    "styled-components": "^6.1",
     "typescript": "^5.8.2"
   },
   "peerDependencies": {
-    "@sanity/icons": ">= 2",
-    "@sanity/ui": ">= 2",
-    "@sanity/util": "^4",
-    "react": "^18.3 || ^19",
-    "react-dom": "^18.3 || ^19",
-    "react-is": "^18.3 || ^19",
-    "sanity": "^3 || ^4 || ^5"
+    "@sanity/icons": ">= 5",
+    "@sanity/ui": ">= 4",
+    "@sanity/util": "^5 || ^6.0.0-0",
+    "react": "^19.2",
+    "react-dom": "^19.2",
+    "react-is": "^19.2",
+    "sanity": "^5 || ^6.0.0-0",
+    "styled-components": "^6.1"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20.19 <22 || >=22.12"
+  },
+  "sanityPlugin": {
+    "verifyPackage": {
+      "nodeEngine": false
+    }
   }
 }

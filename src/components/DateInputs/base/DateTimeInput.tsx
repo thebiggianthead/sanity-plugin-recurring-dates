@@ -1,6 +1,7 @@
-import {CalendarIcon} from '@sanity/icons'
-import {Box, Button, LayerProvider, Popover, useClickOutside, useForwardedRef} from '@sanity/ui'
-import React, {forwardRef, useCallback, useRef, useState} from 'react'
+import {CalendarIcon} from '@sanity/icons/Calendar'
+import {Box, Button, LayerProvider, useClickOutsideEvent} from '@sanity/ui'
+import {Popover} from '@sanity/ui/popover'
+import React, {forwardRef, useCallback, useImperativeHandle, useRef, useState} from 'react'
 import FocusLock from 'react-focus-lock'
 
 import {DatePicker} from './DatePicker'
@@ -27,12 +28,16 @@ export const DateTimeInput = forwardRef(function DateTimeInput(
 ) {
   const {value, inputValue, onInputChange, onChange, selectTime, timeStep, ...rest} = props
   const [popoverRef, setPopoverRef] = useState<HTMLElement | null>(null)
-  const forwardedRef = useForwardedRef(ref)
+  const forwardedRef = useRef<HTMLInputElement>(null)
+  useImperativeHandle(ref, () => forwardedRef.current as HTMLInputElement)
   const buttonRef = useRef(null)
 
   const [isPickerOpen, setPickerOpen] = useState(false)
 
-  useClickOutside(() => setPickerOpen(false), [popoverRef])
+  useClickOutsideEvent(
+    () => setPickerOpen(false),
+    () => [popoverRef],
+  )
 
   const handleDeactivation = useCallback(() => {
     forwardedRef.current?.focus()

@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 
-import {TextInput, useForwardedRef} from '@sanity/ui'
-import React, {useEffect} from 'react'
+import {TextInput} from '@sanity/ui'
+import React, {useEffect, useImperativeHandle, useRef} from 'react'
 
 import {DateTimeInput} from './base/DateTimeInput'
 import {ParseResult} from './types'
@@ -77,7 +77,8 @@ export const CommonDateTimeInput = React.forwardRef(function CommonDateTimeInput
     [serialize, onChange],
   )
 
-  const forwardedRef = useForwardedRef(ref)
+  const forwardedRef = useRef<HTMLInputElement>(null)
+  useImperativeHandle(ref, () => forwardedRef.current as HTMLInputElement)
 
   const parseResult = localValue
     ? parseInputValue(localValue)

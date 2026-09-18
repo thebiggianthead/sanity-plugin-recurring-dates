@@ -1,4 +1,5 @@
-import {TrashIcon, WarningOutlineIcon} from '@sanity/icons'
+import {TrashIcon} from '@sanity/icons/Trash'
+import {WarningOutlineIcon} from '@sanity/icons/WarningOutline'
 import {Box, Button, Card, Flex, Stack, Text} from '@sanity/ui'
 import {upperFirst} from 'lodash'
 import {useCallback} from 'react'
@@ -25,7 +26,7 @@ export function RemoveEndDate({
             <WarningOutlineIcon />
           </Text>
         </Box>
-        <Stack space={3} flex={1} marginLeft={3}>
+        <Stack gap={3} flex={1} marginLeft={3}>
           <Text size={1} weight="semibold">
             The {title ? upperFirst(title) : `current`} field has an end date
           </Text>
