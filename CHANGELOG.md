@@ -5,6 +5,23 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 3.0.0 (2026-09-18)
+
+- fix(deps)!: support sanity v6, @sanity/icons v5 and @sanity/ui v4 (#42) ([f4e7754](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/commit/f4e7754)), closes [#42](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/issues/42)
+
+### BREAKING CHANGE
+
+- requires @sanity/icons >= 5 and @sanity/ui >= 4
+
+- chore(deps)!: update dependencies and support Sanity Studio v5/v6
+
+* Updated `sanity-plugin-utils` to version 2.
+* Added `react-focus-lock` as a new dependency.
+* Bumped React and related types to version 19.2.
+* Updated `sanity` dependency to version 6.
+* Adjusted Node engine requirements to support versions >=20.19 <22 || >=22.12.
+* Updated README to reflect support for Sanity Studio v5/v6.
+
 ## <small>2.0.2 (2026-01-02)</small>
 
 - fix(deps): support studio v5 (#32) ([38e8b68](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/commit/38e8b68)), closes [#32](https://github.com/thebiggianthead/sanity-plugin-recurring-dates/issues/32)
