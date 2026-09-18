@@ -1,6 +1,6 @@
 # sanity-plugin-recurring-dates
 
-> This is a **Sanity Studio v3** plugin.
+> This is plugin supports **Sanity Studio v5 / v6**.
 
 This is a plugin to add a custom input component to your Sanity Studio which allows you to specify recurring dates.
 
